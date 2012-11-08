@@ -1,0 +1,5 @@
+.rvmrc
+Gemfile.lock
+conf/ec2_credentials.yml
+cache
+cache/*
