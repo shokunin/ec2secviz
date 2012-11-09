@@ -2,13 +2,18 @@
 module Secviz
   class Cache
     require 'yaml'
+    require 'ostruct'
 
     def load_nodes
-      YAML::load(File.open("/tmp/node_cache.yml"))
+      YAML::load(File.open(
+        File.join(File.dirname(__FILE__), '..', '..', 'cache', 'node_cache.yml'))
+      )
     end
 
     def load_groups
-      YAML::load(File.open("/tmp/group_cache.yml"))
+      YAML::load(File.open(
+        File.join(File.dirname(__FILE__), '..', '..', 'cache', 'group_cache.yml'))
+      )
     end
 
 #TODO allow groups to be searchable
@@ -16,8 +21,8 @@ module Secviz
       nodes = self.load_groups
     end
 
-#TODO allow nodes to be searchable
-    def search_nodes
+    def search_nodes(params)
+      matches
       nodes = self.load_nodes
     end
 
