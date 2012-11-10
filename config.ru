@@ -1,6 +1,7 @@
 # controllers to load
 require (File.join(File.dirname(__FILE__), 'controllers', 'downloader'))
 require (File.join(File.dirname(__FILE__), 'controllers', 'toppage'))
+require (File.join(File.dirname(__FILE__), 'controllers', 'search'))
 
 # serve up static assets using rack
 map "/js" do
@@ -9,6 +10,10 @@ end
 
 map "/download" do
     run Downloader
+end
+
+map "/search" do
+    run Search
 end
 
 map "/" do

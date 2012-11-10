@@ -21,9 +21,26 @@ module Secviz
       nodes = self.load_groups
     end
 
-    def search_nodes(params)
+    def search_nodes(params={}, resp={})
+      matches = []
+      self.load_nodes.each do |node|
+        m = 0
+        params.each do |k, v|
+          if node.send(k) == v
+            m += 1
+          end
+        end
+        if m >= params.length
+          if resp.length < 1
+            matches << node.marshal_dump
+          else
+            q = {}
+            resp.each{|v| q[v] = node.send(v)}
+            matches << q
+          end
+        end
+      end
       matches
-      nodes = self.load_nodes
     end
 
   end
