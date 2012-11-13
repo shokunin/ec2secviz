@@ -20,4 +20,11 @@ class Toppage < Sinatra::Base
     end
   end
 
+  get '/host_info' do
+    respond_to do |wants|
+      wants.html {  erb :host_form,
+      :layout => :base_layout }
+    end
+  end
+
 end
