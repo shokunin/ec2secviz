@@ -13,4 +13,11 @@ class Toppage < Sinatra::Base
     "OK"
   end
 
+  get '/' do
+    respond_to do |wants|
+      wants.html {  erb :index,
+      :layout => :base_layout }
+    end
+  end
+
 end
