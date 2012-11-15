@@ -16,9 +16,14 @@ module Secviz
       )
     end
 
-#TODO allow groups to be searchable
-    def search_groups
-      nodes = self.load_groups
+    def search_groups_by_id(id)
+      matches = []
+      self.load_groups.each do |group|
+        if group.id == id
+          matches << group.marshal_dump
+        end
+      end
+      matches
     end
 
     def search_nodes(params={}, resp={})
