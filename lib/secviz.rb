@@ -3,5 +3,6 @@ module Secviz
   require 'secviz/config'
   require 'secviz/nodes'
   require 'secviz/cache'
+  require 'secviz/portsearch'
 end
 

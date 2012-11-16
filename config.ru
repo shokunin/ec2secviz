@@ -8,6 +8,11 @@ map "/js" do
   run Rack::Directory.new("#{File.join(File.dirname(__FILE__), 'static', 'js')}")
 end
 
+map "/images" do
+  run Rack::Directory.new("#{File.join(File.dirname(__FILE__), 'static', 'images')}")
+end
+
+
 map "/download" do
     run Downloader
 end
