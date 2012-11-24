@@ -48,20 +48,22 @@ module Secviz
       open_conns
     end
 
-    def ports2d3(hostname)
+    def ports2d3(hostname, port_filter=[])
       portslist = { "nodes" => [{"name" => hostname, "group" => 3}], 
                   "links" => []
                 }
       self.list_open_ports_by_host(hostname).each do |port, hosts|
-        portslist["nodes"] << {"name" => port, "group" => 1}
-        port_in_nodes = portslist["nodes"].length - 1
-        portslist["links"] << {"source" => port_in_nodes, "target"=>0, "value"=>1}
-        hosts.each do |host| 
-          portslist["nodes"] << {"name" => host, "group" => 2}
-          host_in_nodes = portslist["nodes"].length - 1
-          portslist["links"] << {"source" => host_in_nodes, 
-                                 "target" => port_in_nodes, 
-                                 "value"=>1}
+        if port_filter.length == 0 or port_filter.member?port
+          portslist["nodes"] << {"name" => port, "group" => 1}
+          port_in_nodes = portslist["nodes"].length - 1
+          portslist["links"] << {"source" => port_in_nodes, "target"=>0, "value"=>1}
+          hosts.each do |host| 
+            portslist["nodes"] << {"name" => host, "group" => 2}
+            host_in_nodes = portslist["nodes"].length - 1
+            portslist["links"] << {"source" => host_in_nodes, 
+                                   "target" => port_in_nodes, 
+                                   "value"=>1}
+          end
         end
       end
       portslist
