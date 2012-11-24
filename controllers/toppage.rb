@@ -27,4 +27,12 @@ class Toppage < Sinatra::Base
     end
   end
 
+  get '/secinfo' do
+    respond_to do |wants|
+      wants.html {  erb :secinfo_form,
+      :layout => :base_layout }
+    end
+  end
+
+
 end

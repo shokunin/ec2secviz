@@ -1,6 +1,6 @@
 <% host_info.each do |hostinfo| %>
 <table border = "1">
-  <tr><th colspan="2"><%= hostinfo[:name] %></th></tr>
+  <tr><th colspan="2"><%= hostname %></th></tr>
   <% hostinfo.each do |k, v| %>
     <% if k != :name %>
       <tr><td><%= k.to_s %></td><td><%= v.to_s %></td></tr>
