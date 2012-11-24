@@ -29,7 +29,7 @@ module Secviz
 
               y['ipRanges'].each do |g| 
                 if g['cidrIp'] =~ /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/32$/
-                  bloc = $1
+                  bloc = cache.ip_search($1)
                 elsif g['cidrIp'] =~ /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/0$/
                   bloc = "Internet"
                 else

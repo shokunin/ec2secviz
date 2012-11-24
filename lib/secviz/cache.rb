@@ -26,6 +26,16 @@ module Secviz
       matches
     end
 
+    def ip_search(ip_address)
+      res = self.search_nodes({"public_ip_address" => ip_address}, ['name'] )
+      if res.length == 0
+        name = ip_address
+      else
+        name = res[0]["name"]
+      end
+      name
+    end
+
     def search_nodes(params={}, resp={})
       matches = []
       self.load_nodes.each do |node|

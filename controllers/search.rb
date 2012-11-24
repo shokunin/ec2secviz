@@ -12,5 +12,4 @@ class Search < Sinatra::Base
     q.search_nodes({}, ['name']).collect.each{ |k| p k['name'] }.sort.to_json
   end
 
-
 end
