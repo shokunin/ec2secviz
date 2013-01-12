@@ -3,6 +3,7 @@ module Secviz
   class Portsearch
     require 'yaml'
     require 'ostruct'
+    require 'pp'
 
     def list_open_ports_by_host(hostname)
       open_conns = {}
@@ -48,6 +49,18 @@ module Secviz
       open_conns
     end
 
+    def node2pos(nodes={}, name)
+      pos = -1
+      val = -1
+      nodes.each do |x|
+        pos += 1
+        if x['group'] == 2 and x['name'] == name
+          val = pos
+        end
+      end
+      val
+    end
+
     def ports2d3(hostname, port_filter=[])
       portslist = { "nodes" => [{"name" => hostname, "group" => 3}], 
                   "links" => []
@@ -58,8 +71,14 @@ module Secviz
           port_in_nodes = portslist["nodes"].length - 1
           portslist["links"] << {"source" => port_in_nodes, "target"=>0, "value"=>1}
           hosts.each do |host| 
-            portslist["nodes"] << {"name" => host, "group" => 2}
-            host_in_nodes = portslist["nodes"].length - 1
+            #check to see if we already have the node in the list of nodes
+            have_node = node2pos(portslist['nodes'], host)
+            if have_node > -1
+              host_in_nodes = have_node
+            else
+              portslist["nodes"] << {"name" => host, "group" => 2}
+              host_in_nodes = portslist["nodes"].length - 1
+            end
             portslist["links"] << {"source" => host_in_nodes, 
                                    "target" => port_in_nodes, 
                                    "value"=>1}
