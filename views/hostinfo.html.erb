@@ -3,7 +3,11 @@
   <tr><th colspan="2"><%= hostname %></th></tr>
   <% hostinfo.each do |k, v| %>
     <% if k != :name %>
+      <% if k == :security_group_ids %>
+      <tr><td><%= k.to_s %></td><td><%= v.join(",") %></td></tr>
+      <% else %>
       <tr><td><%= k.to_s %></td><td><%= v.to_s %></td></tr>
+      <% end %>
     <% end %>
   <% end %>
 </table>
