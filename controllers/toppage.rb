@@ -27,6 +27,10 @@ class Toppage < Sinatra::Base
     end
   end
 
+  get '/contact' do
+    redirect 'http://shokunin.co/contact.html', 301
+  end
+
   get '/secinfo' do
     respond_to do |wants|
       wants.html {  erb :secinfo_form,

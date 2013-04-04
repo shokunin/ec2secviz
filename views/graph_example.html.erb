@@ -54,7 +54,8 @@ var force = d3.layout.force()
 
   node.append("circle")
       .attr("r", 5)
-      .style("fill", function(d) { return color(d.group); });
+      .style("fill", function(d) { return color(d.group); })
+      .call(force.drag);
 
   node.append("text")
       .attr("dx", 12)
