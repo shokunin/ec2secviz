@@ -9,7 +9,7 @@ class Search < Sinatra::Base
 
   get '/allbyname' do
     q=Secviz::Cache.new
-    q.search_nodes({}, ['name']).collect.each{ |k| p k['name'] }.sort.to_json
+    q.search_nodes({}, ['name']).collect.each{ |k| k['name'] }.sort.to_json
   end
 
   get '/hostinfo/:hostname/info' do
