@@ -1,4 +1,4 @@
-<script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <style>
 
 .link {
@@ -7,7 +7,12 @@
 
 .node text {
   pointer-events: none;
-  font: 10px sans-serif;
+  font: 15px sans-serif;
+}
+
+circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
 }
 
 </style>
@@ -18,11 +23,6 @@ var width = 960,
     height = 500
 
 var color = d3.scale.category20();
-
-var icon = {}
-    icon[1] = "http://www.mague.com/favicon.ico"
-    icon[2] = "http://www.mague.com/favicon.ico"
-    icon[3] = "https://github.com/favicon.ico"
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -52,12 +52,9 @@ var force = d3.layout.force()
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag);
 
-  node.append("image")
-  .attr("xlink:href", "/images/node_favicon.ico")
-      .attr("x", -8)
-      .attr("y", -8)
-      .attr("width", 16)
-      .attr("height", 16);
+  node.append("circle")
+      .attr("r", 5)
+      .style("fill", function(d) { return color(d.group); });
 
   node.append("text")
       .attr("dx", 12)
